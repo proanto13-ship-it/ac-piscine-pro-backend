@@ -77,9 +77,37 @@ def main() -> None:
     store = SQLiteSyncV2Store(db_path=db_path)
     store.initialize()
 
+    seed_demo_dataset(
+        store,
+        org_id=args.org_id.strip(),
+        email=args.email.strip().lower(),
+        password=args.password,
+        free_org_id=args.free_org_id.strip(),
+        free_email=args.free_email.strip().lower(),
+        free_password=args.free_password,
+    )
+
+    print("Demo seed ready.")
+    print(f"Database: {db_path.resolve()}")
+    print(f"Pro Organization ID: {args.org_id.strip()}")
+    print(f"Pro Email: {args.email.strip().lower()}")
+    print(f"Pro Password: {args.password}")
+    print(f"Free Organization ID: {args.free_org_id.strip()}")
+    print(f"Free Email: {args.free_email.strip().lower()}")
+    print(f"Free Password: {args.free_password}")
+
+
+def seed_demo_dataset(
+    store: SQLiteSyncV2Store,
+    *,
+    org_id: str = "demo-pro-hydrazur",
+    email: str = "demo-pro@hydrazur.test",
+    password: str = "demo1234",
+    free_org_id: str = "demo-free-hydrazur",
+    free_email: str = "demo-free@hydrazur.test",
+    free_password: str = "demo1234",
+) -> None:
     anchor = datetime.now(timezone.utc).replace(microsecond=0)
-    org_id = args.org_id.strip()
-    free_org_id = args.free_org_id.strip()
     user_id = "demo-user-admin"
     free_user_id = "demo-user-free"
 
@@ -119,10 +147,10 @@ def main() -> None:
         {
             "id": user_id,
             "organization_id": org_id,
-            "email": args.email.strip().lower(),
+            "email": email,
             "fullName": "Demo Admin",
             "role": "admin",
-            "password_hash": hash_password(args.password),
+            "password_hash": hash_password(password),
             "updatedAtIso": iso(anchor),
         },
     )
@@ -172,10 +200,10 @@ def main() -> None:
         {
             "id": free_user_id,
             "organization_id": free_org_id,
-            "email": args.free_email.strip().lower(),
+            "email": free_email,
             "fullName": "Demo Free",
             "role": "admin",
-            "password_hash": hash_password(args.free_password),
+            "password_hash": hash_password(free_password),
             "updatedAtIso": iso(anchor),
         },
     )
@@ -400,15 +428,6 @@ def main() -> None:
             },
             TRANSPARENT_PNG,
         )
-
-    print("Demo seed ready.")
-    print(f"Database: {db_path.resolve()}")
-    print(f"Pro Organization ID: {org_id}")
-    print(f"Pro Email: {args.email.strip().lower()}")
-    print(f"Pro Password: {args.password}")
-    print(f"Free Organization ID: {free_org_id}")
-    print(f"Free Email: {args.free_email.strip().lower()}")
-    print(f"Free Password: {args.free_password}")
 
 
 def upsert_record(store: SQLiteSyncV2Store, resource: str, payload: dict) -> dict:

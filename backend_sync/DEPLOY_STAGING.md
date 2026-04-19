@@ -32,6 +32,39 @@ cd backend_sync
 python3 v2_server.py
 ```
 
+Commande Render recommandee :
+
+```bash
+python3 v2_server.py
+```
+
+Correction directe pour le service Render actuel :
+
+- URL publique : `https://ac-piscine-pro-backend.onrender.com`
+- symptome legacy : `/health` repond avec `service = hydr-azur-sync`
+- symptome V2 attendu : `/health` repond avec `service = hydr-azur-sync-v2`
+
+Si `POST /v2/auth/login` renvoie `404`, le service Render lance encore le backend legacy.
+
+Dans ce cas :
+
+1. remplacez la Start Command Render par :
+
+```bash
+python3 v2_server.py
+```
+
+2. ou gardez `python3 server.py` mais avec `APP_ENV=staging`
+
+3. redeployez le service
+
+4. relancez le seed demo
+
+Compatibilite :
+
+- si Render utilise encore `python3 server.py`, le fichier [backend_sync/server.py](/Users/ac/ac_piscine_pro copie/backend_sync/server.py) bascule maintenant automatiquement vers la V2 quand `APP_ENV=staging` ou `APP_ENV=prod`
+- en `dev`, `python3 server.py` garde le backend legacy historique
+
 Le serveur ecoute sur :
 
 - `0.0.0.0`
@@ -61,6 +94,12 @@ Puis lancer :
 ```bash
 cd backend_sync
 python3 v2_seed_demo.py
+```
+
+Exemple Render :
+
+```bash
+APP_ENV=staging DEMO_SEED_ENABLED=true python3 v2_seed_demo.py
 ```
 
 Comptes crees :

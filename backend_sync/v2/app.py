@@ -987,13 +987,61 @@ class SyncV2Handler(BaseHTTPRequestHandler):
                 },
             )
         except LookupError:
+            log_event(
+                logging.WARNING,
+                "auth_login_failed",
+                requestId=self._request_id,
+                organizationId=str(
+                    payload.get("organization_id")
+                    or payload.get("organizationId")
+                    or ""
+                ).strip()
+                if "payload" in locals()
+                else "",
+                email=str(payload.get("email", "")).strip().lower()
+                if "payload" in locals()
+                else "",
+                reason="user_not_found",
+            )
             self._send_json(
                 HTTPStatus.UNAUTHORIZED,
                 {"message": "Email, mot de passe ou organisation invalides."},
             )
         except PermissionError as error:
+            log_event(
+                logging.WARNING,
+                "auth_login_failed",
+                requestId=self._request_id,
+                organizationId=str(
+                    payload.get("organization_id")
+                    or payload.get("organizationId")
+                    or ""
+                ).strip()
+                if "payload" in locals()
+                else "",
+                email=str(payload.get("email", "")).strip().lower()
+                if "payload" in locals()
+                else "",
+                reason="invalid_credentials",
+            )
             self._send_json(HTTPStatus.UNAUTHORIZED, {"message": str(error)})
         except ValueError as error:
+            log_event(
+                logging.WARNING,
+                "auth_login_rejected",
+                requestId=self._request_id,
+                organizationId=str(
+                    payload.get("organization_id")
+                    or payload.get("organizationId")
+                    or ""
+                ).strip()
+                if "payload" in locals()
+                else "",
+                email=str(payload.get("email", "")).strip().lower()
+                if "payload" in locals()
+                else "",
+                reason=str(error),
+            )
             self._send_json(HTTPStatus.BAD_REQUEST, {"message": str(error)})
 
     def _handle_admin_assign_subscription(self):

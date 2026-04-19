@@ -82,6 +82,18 @@ Exemple staging :
 APP_ENV=staging PORT=8000 DATABASE_URL=sqlite:////srv/hydrazur/staging.sqlite3 python3 v2_server.py
 ```
 
+Render / services cloud :
+
+```bash
+APP_ENV=staging PORT=8000 DATABASE_URL=sqlite:////srv/hydrazur/staging.sqlite3 python3 v2_server.py
+```
+
+Si votre plateforme lance encore `python3 server.py`, l entrypoint legacy reroute maintenant automatiquement vers la V2 en `staging` et `prod`.
+
+Guide Render detaille :
+
+- [backend_sync/DEPLOY_RENDER_STAGING.md](/Users/ac/ac_piscine_pro copie/backend_sync/DEPLOY_RENDER_STAGING.md)
+
 Pour les pilotes en local, vous pouvez garder le token admin par defaut `dev-admin-token` ou le surcharger :
 
 ```bash

@@ -128,6 +128,11 @@ class _LoginPageState extends State<LoginPage> {
 
   String _friendlyLoginErrorMessage(String message) {
     final normalized = message.toLowerCase();
+    if (normalized.contains('route inconnue') ||
+        normalized.contains('http 404') ||
+        normalized.contains('not found')) {
+      return 'Le service de connexion n’est pas disponible sur ce serveur. Contactez le support.';
+    }
     if (normalized.contains('serveur invalide') ||
         normalized.contains('adresse du serveur invalide') ||
         normalized.contains('endpoint v2 invalide')) {

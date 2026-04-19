@@ -18,6 +18,12 @@ python3 server.py
 
 Par defaut, le serveur ecoute sur `http://0.0.0.0:8787`.
 
+Important :
+
+- en `dev`, `python3 server.py` lance toujours le backend legacy `/sync`
+- en `staging` ou `prod`, `python3 server.py` reroute maintenant automatiquement vers la V2
+- pour un deploiement Render/TestFlight, preferez directement `python3 v2_server.py`
+
 ## Variables utiles
 
 - `SYNC_HOST` : host d'ecoute
