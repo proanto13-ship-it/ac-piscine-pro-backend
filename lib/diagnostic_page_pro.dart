@@ -242,7 +242,7 @@ class _DiagnosticPageProState extends State<DiagnosticPagePro> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Diagnostic technique"),
+        title: const Text('Diagnostic'),
         backgroundColor: const Color(0xFF0F6E7C),
         foregroundColor: Colors.white,
         actions: [
@@ -415,7 +415,7 @@ class _DiagnosticPageProState extends State<DiagnosticPagePro> {
             child: Column(
               children: [
                 _actionRow(
-                  primaryLabel: 'PDF diagnostic',
+                  primaryLabel: 'Rapport PDF',
                   primaryIcon: Icons.picture_as_pdf_outlined,
                   onPrimaryTap: () async {
                     if (!FeatureGate.isEnabled(
@@ -511,7 +511,7 @@ class _DiagnosticPageProState extends State<DiagnosticPagePro> {
             ),
           ),
           _sectionCard(
-            title: 'Résumé IA',
+            title: 'Synthèse du diagnostic',
             subtitle: 'Lecture reformulée, utile en second niveau.',
             icon: Icons.auto_awesome_outlined,
             accent: const Color(0xFF7A5AF8),
@@ -531,15 +531,15 @@ class _DiagnosticPageProState extends State<DiagnosticPagePro> {
                   ),
                   label: Text(
                     _showAiSummary
-                        ? 'Masquer le résumé IA'
-                        : 'Afficher le résumé IA',
+                        ? 'Masquer la synthèse'
+                        : 'Afficher la synthèse',
                   ),
                 ),
                 if (_showAiSummary) ...[
                   const SizedBox(height: 12),
                   Text(
                     _aiSummary ??
-                        "Appuyez sur le bouton ci-dessous pour générer un résumé intelligent.",
+                        'Appuyez sur le bouton ci-dessous pour générer une synthèse automatique.',
                     style: const TextStyle(
                       height: 1.45,
                       color: Color(0xFF344054),
@@ -559,10 +559,10 @@ class _DiagnosticPageProState extends State<DiagnosticPagePro> {
                         : const Icon(Icons.auto_awesome),
                     label: Text(
                       _isGeneratingAiSummary
-                          ? "Génération en cours..."
+                          ? 'Génération en cours...'
                           : _aiSummary == null
-                              ? "Générer le résumé IA"
-                              : "Régénérer le résumé IA",
+                              ? 'Générer la synthèse'
+                              : 'Régénérer la synthèse',
                     ),
                   ),
                 ],
@@ -977,24 +977,53 @@ class _DiagnosticPageProState extends State<DiagnosticPagePro> {
     required IconData secondaryIcon,
     required VoidCallback? onSecondaryTap,
   }) {
-    return Row(
-      children: [
-        Expanded(
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final useVerticalLayout = constraints.maxWidth < 430;
+        final primaryButton = SizedBox(
+          width: double.infinity,
           child: FilledButton.icon(
             onPressed: onPrimaryTap,
             icon: Icon(primaryIcon),
-            label: Text(primaryLabel),
+            label: Text(
+              primaryLabel,
+              textAlign: TextAlign.center,
+              softWrap: true,
+            ),
           ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
+        );
+        final secondaryButton = SizedBox(
+          width: double.infinity,
           child: OutlinedButton.icon(
             onPressed: onSecondaryTap,
             icon: Icon(secondaryIcon),
-            label: Text(secondaryLabel),
+            label: Text(
+              secondaryLabel,
+              textAlign: TextAlign.center,
+              softWrap: true,
+            ),
           ),
-        ),
-      ],
+        );
+
+        if (useVerticalLayout) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              primaryButton,
+              const SizedBox(height: 12),
+              secondaryButton,
+            ],
+          );
+        }
+
+        return Row(
+          children: [
+            Expanded(child: primaryButton),
+            const SizedBox(width: 12),
+            Expanded(child: secondaryButton),
+          ],
+        );
+      },
     );
   }
 
@@ -1010,31 +1039,39 @@ class _DiagnosticPageProState extends State<DiagnosticPagePro> {
   }
 
   Widget _infoPill(IconData icon, String label, String value) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF8FAFC),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFFE4E7EC)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 16, color: const Color(0xFF184663)),
-          const SizedBox(width: 8),
-          RichText(
-            text: TextSpan(
-              style: const TextStyle(color: Color(0xFF344054)),
-              children: [
-                TextSpan(
-                  text: '$label : ',
-                  style: const TextStyle(fontWeight: FontWeight.w700),
+    final maxWidth = math.max(180.0, MediaQuery.sizeOf(context).width - 92);
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: maxWidth),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        decoration: BoxDecoration(
+          color: const Color(0xFFF8FAFC),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: const Color(0xFFE4E7EC)),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(icon, size: 16, color: const Color(0xFF184663)),
+            const SizedBox(width: 8),
+            Flexible(
+              child: RichText(
+                softWrap: true,
+                text: TextSpan(
+                  style: const TextStyle(color: Color(0xFF344054), height: 1.3),
+                  children: [
+                    TextSpan(
+                      text: '$label : ',
+                      style: const TextStyle(fontWeight: FontWeight.w700),
+                    ),
+                    TextSpan(text: value),
+                  ],
                 ),
-                TextSpan(text: value),
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

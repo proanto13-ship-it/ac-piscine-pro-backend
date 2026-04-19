@@ -1304,6 +1304,9 @@ String userVisibleSyncMessage(String rawMessage) {
   if (normalized.contains('media') && normalized.contains('indisponibles')) {
     return 'Synchronisation terminée. Certaines pièces jointes restent disponibles sur cet appareil.';
   }
+  if (normalized.contains('route inconnue')) {
+    return 'Synchronisation indisponible pour le moment.';
+  }
   if (normalized.contains('erreur http') ||
       normalized.contains('invalide') ||
       normalized.contains('impossible')) {

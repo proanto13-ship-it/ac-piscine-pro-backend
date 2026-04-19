@@ -34,7 +34,7 @@ class DiagnosticResult {
   final List<String> validation;
   final String dureeEstimee;
   final String stabilisation;
-  
+
   final List<String> analyse;
   final List<Produit> produits;
   final double totalProduitsMin;
@@ -42,7 +42,7 @@ class DiagnosticResult {
   final double mainOeuvre;
   final double totalMin;
   final double totalMax;
-  
+
   DiagnosticResult({
     required this.score,
     required this.statut,
@@ -57,7 +57,6 @@ class DiagnosticResult {
     required this.validation,
     required this.dureeEstimee,
     required this.stabilisation,
-    
     required this.analyse,
     required this.produits,
     required this.totalProduitsMin,
@@ -65,9 +64,9 @@ class DiagnosticResult {
     required this.mainOeuvre,
     required this.totalMin,
     required this.totalMax,
-    
   });
 }
+
 class DiagnosticLogic {
   static DiagnosticResult build({
     required double ph,
@@ -86,8 +85,8 @@ class DiagnosticLogic {
     final cleanObservation = observation.trim().toLowerCase();
     final hasGreenWater =
         cleanObservation.contains('verte') || cleanObservation.contains('vert');
-    final hasCloudyWater =
-        cleanObservation.contains('trouble') || cleanObservation.contains('laiteuse');
+    final hasCloudyWater = cleanObservation.contains('trouble') ||
+        cleanObservation.contains('laiteuse');
 
     final data = PoolData(
       volume: volumeM3,
@@ -130,7 +129,9 @@ class DiagnosticLogic {
     }
 
     void addVerification(String text) {
-      if (!verificationTechnique.contains(text)) verificationTechnique.add(text);
+      if (!verificationTechnique.contains(text)) {
+        verificationTechnique.add(text);
+      }
     }
 
     double roundQuantity(double value, String unit) {
@@ -177,29 +178,36 @@ class DiagnosticLogic {
 
     if (ph > 7.8) {
       score -= 2;
-      addAnalyse("pH trop élevé : le chlore devient moins efficace et le risque de tartre augmente.");
-      addAdjustment("Abaisser le pH par palier jusqu’à 7.2 – 7.4 puis recontrôler.");
+      addAnalyse(
+          "pH trop élevé : le chlore devient moins efficace et le risque de tartre augmente.");
+      addAdjustment(
+          "Abaisser le pH par palier jusqu’à 7.2 – 7.4 puis recontrôler.");
       final targetPh = 7.4;
       final delta = max(0, ph - targetPh);
       final qtyKg = (volumeM3 / 10) * (delta / 0.1) * 0.03;
       addProduct("pH-", qtyKg, "kg");
-      addValidation("Pour le pH-, fractionner la dose puis laisser circuler avant nouvelle mesure.");
+      addValidation(
+          "Pour le pH-, fractionner la dose puis laisser circuler avant nouvelle mesure.");
     } else if (ph > 7.6) {
       score -= 1;
-      addAnalyse("pH légèrement élevé : un ajustement préventif est conseillé.");
+      addAnalyse(
+          "pH légèrement élevé : un ajustement préventif est conseillé.");
       addAdjustment("Ramener le pH vers 7.3 – 7.4.");
     } else if (ph < 7.0) {
       score -= 2;
-      addAnalyse("pH trop bas : l’eau devient agressive pour les équipements et le confort baigneur baisse.");
+      addAnalyse(
+          "pH trop bas : l’eau devient agressive pour les équipements et le confort baigneur baisse.");
       addAdjustment("Remonter le pH progressivement vers 7.2 – 7.4.");
       final targetPh = 7.2;
       final delta = max(0, targetPh - ph);
       final qtyKg = (volumeM3 / 10) * (delta / 0.2) * 0.15;
       addProduct("pH+", qtyKg, "kg");
-      addValidation("Pour le pH+, procéder par étapes et recontrôler après brassage.");
+      addValidation(
+          "Pour le pH+, procéder par étapes et recontrôler après brassage.");
     } else if (ph < 7.2) {
       score -= 1;
-      addAnalyse("pH légèrement bas : un réajustement limitera l’agressivité de l’eau.");
+      addAnalyse(
+          "pH légèrement bas : un réajustement limitera l’agressivité de l’eau.");
       addAdjustment("Ramener le pH au coeur de zone 7.2 – 7.4.");
     }
 
@@ -220,11 +228,14 @@ class DiagnosticLogic {
             : "Revenir à un chlore libre cible entre 1.5 et 2 ppm.",
       );
       addProduct("Chlore choc", qtyKg, "kg");
-      addValidation("Mesurer à nouveau le chlore libre 4 à 12h après traitement selon le brassage.");
+      addValidation(
+          "Mesurer à nouveau le chlore libre 4 à 12h après traitement selon le brassage.");
     } else if (chlore > 4.0) {
       score -= 1;
-      addAnalyse("Chlore élevé : surveiller le confort baigneur et attendre une redescente avant baignade.");
-      addAdjustment("Stopper les apports de chlore et laisser la valeur redescendre.");
+      addAnalyse(
+          "Chlore élevé : surveiller le confort baigneur et attendre une redescente avant baignade.");
+      addAdjustment(
+          "Stopper les apports de chlore et laisser la valeur redescendre.");
     }
 
     if (correctedTac < 80) {
@@ -241,24 +252,30 @@ class DiagnosticLogic {
       addAnalyse(
         "Alcalinité corrigée trop haute (${correctedTac.toStringAsFixed(0)} ppm) : le pH sera difficile à redescendre durablement.",
       );
-      addAdjustment("Réduire l’alcalinité par cycles acide + aération, avec re-mesure entre chaque étape.");
+      addAdjustment(
+          "Réduire l’alcalinité par cycles acide + aération, avec re-mesure entre chaque étape.");
       final delta = correctedTac - 120;
       final qtyKg = (delta / 10) * 0.024 * volumeM3;
       addProduct("Correcteur TAC", qtyKg, "kg");
-      addValidation("Pour le TAC élevé, traiter en plusieurs cycles et ne pas injecter toute la dose d’un coup.");
+      addValidation(
+          "Pour le TAC élevé, traiter en plusieurs cycles et ne pas injecter toute la dose d’un coup.");
     }
 
     if (th < 150 && lsi < -0.10) {
       score -= 1;
-      addAnalyse("TH bas : la faible dureté calcique accentue le caractère agressif de l’eau.");
-      addAdjustment("Relever le calcium pour sécuriser les surfaces et le LSI.");
+      addAnalyse(
+          "TH bas : la faible dureté calcique accentue le caractère agressif de l’eau.");
+      addAdjustment(
+          "Relever le calcium pour sécuriser les surfaces et le LSI.");
       final delta = 180 - th;
       final qtyKg = (max(0, delta) / 10) * 0.015 * volumeM3;
       addProduct("Calcium+", qtyKg, "kg");
     } else if (th > 350 && lsi > 0.20) {
       score -= 1;
-      addAnalyse("TH élevé combiné à un LSI positif : risque renforcé de dépôts calcaires.");
-      addAdjustment("Limiter l’entartrage et surveiller l’échangeur, la ligne d’eau et la cellule.");
+      addAnalyse(
+          "TH élevé combiné à un LSI positif : risque renforcé de dépôts calcaires.");
+      addAdjustment(
+          "Limiter l’entartrage et surveiller l’échangeur, la ligne d’eau et la cellule.");
       final qtyL = lsi > 0.6 ? volumeM3 / 40 : volumeM3 / 50;
       addProduct("Séquestrant calcaire", qtyL, "L");
     }
@@ -268,11 +285,13 @@ class DiagnosticLogic {
       final targetCya = treatmentType == 'sel' ? 60.0 : 40.0;
       final renewalFraction = (1 - (targetCya / stabilisant)).clamp(0.0, 1.0);
       final renewalPercent = (renewalFraction * 100).round();
-      addAnalyse("Stabilisant trop élevé : le chlore libre devient moins réactif.");
+      addAnalyse(
+          "Stabilisant trop élevé : le chlore libre devient moins réactif.");
       addAdjustment(
         "Renouveler environ $renewalPercent% d’eau pour revenir sur un stabilisant plus efficace.",
       );
-      addValidation("Après renouvellement d’eau, refaire un contrôle complet TAC / pH / chlore.");
+      addValidation(
+          "Après renouvellement d’eau, refaire un contrôle complet TAC / pH / chlore.");
     } else if (stabilisant < 20 && treatmentType != 'sel') {
       score -= 1;
       addAnalyse("Stabilisant faible : le chlore sera plus sensible aux UV.");
@@ -285,35 +304,47 @@ class DiagnosticLogic {
     if (treatmentType == 'sel') {
       if (sel != null && sel < 3500) {
         score -= 1;
-        addAnalyse("Taux de sel insuffisant pour une production stable de l’électrolyseur.");
-        addAdjustment("Remonter le taux de sel vers 3800 – 4200 ppm selon la cellule.");
+        addAnalyse(
+            "Taux de sel insuffisant pour une production stable de l’électrolyseur.");
+        addAdjustment(
+            "Remonter le taux de sel vers 3800 – 4200 ppm selon la cellule.");
         final kgSel = ((4000 - sel) * volumeM3) / 1000;
         addProduct("Sel piscine", kgSel, "kg");
       } else if (sel != null && sel > 5000) {
         score -= 1;
-        addAnalyse("Taux de sel trop élevé : usure accélérée possible de la cellule et surconductivité.");
-        addAdjustment("Diluer partiellement le bassin avant nouvelle mise en production.");
+        addAnalyse(
+            "Taux de sel trop élevé : usure accélérée possible de la cellule et surconductivité.");
+        addAdjustment(
+            "Diluer partiellement le bassin avant nouvelle mise en production.");
       }
 
       if (chlore < 1.5 && ph >= 7.2 && ph <= 7.6) {
-        addAnalyse("Production chlore insuffisante malgré un pH correct : vérifier cellule, inversion de polarité et temps de production.");
-        addVerification("Contrôler l’état de la cellule d’électrolyse et l’absence de dépôt.");
+        addAnalyse(
+            "Production chlore insuffisante malgré un pH correct : vérifier cellule, inversion de polarité et temps de production.");
+        addVerification(
+            "Contrôler l’état de la cellule d’électrolyse et l’absence de dépôt.");
       }
 
       if ((temperature ?? 25) < 15) {
-        addAnalyse("Température basse : de nombreux électrolyseurs produisent moins en eau froide.");
+        addAnalyse(
+            "Température basse : de nombreux électrolyseurs produisent moins en eau froide.");
       }
     }
 
     if (hasGreenWater) {
       score -= 2;
-      addAnalyse("Observation terrain : présence d’eau verte, signe probable de prolifération algale.");
-      addAdjustment("Brossage complet, filtration continue et traitement choc jusqu’au retour de transparence.");
-      addVerification("Nettoyer le panier préfiltre et surveiller la pression filtre après traitement.");
+      addAnalyse(
+          "Observation terrain : présence d’eau verte, signe probable de prolifération algale.");
+      addAdjustment(
+          "Brossage complet, filtration continue et traitement choc jusqu’au retour de transparence.");
+      addVerification(
+          "Nettoyer le panier préfiltre et surveiller la pression filtre après traitement.");
     } else if (hasCloudyWater) {
       score -= 1;
-      addAnalyse("Observation terrain : eau trouble, possiblement liée à une filtration insuffisante ou à un déséquilibre chimique.");
-      addVerification("Contrôler le média filtrant et la durée réelle de filtration.");
+      addAnalyse(
+          "Observation terrain : eau trouble, possiblement liée à une filtration insuffisante ou à un déséquilibre chimique.");
+      addVerification(
+          "Contrôler le média filtrant et la durée réelle de filtration.");
     }
 
     score = score.clamp(0, 10);
@@ -324,8 +355,11 @@ class DiagnosticLogic {
             ? "Correction recommandée"
             : "Intervention urgente recommandée";
 
-    final criticalIssue =
-        hasGreenWater || chlore < 0.5 || ph <= 6.8 || ph >= 7.9 || lsi.abs() > 0.6;
+    final criticalIssue = hasGreenWater ||
+        chlore < 0.5 ||
+        ph <= 6.8 ||
+        ph >= 7.9 ||
+        lsi.abs() > 0.6;
     final urgenceLabel = criticalIssue
         ? "Intervention urgente"
         : score >= 8
@@ -361,11 +395,12 @@ class DiagnosticLogic {
         "Éviter une dérive progressive",
       ]);
       explanation =
-          "Le bassin est globalement pilotable, mais quelques ajustements ciblés amélioreront la stabilité et le confort.";
+          "Bassin équilibré. Quelques ajustements amélioreront la stabilité et le confort.";
     }
 
     if (ajustementChimique.isEmpty) {
-      ajustementChimique.add("Aucun ajustement chimique immédiat : maintien et recontrôle planifié.");
+      ajustementChimique.add(
+          "Aucun ajustement chimique immédiat : maintien et recontrôle planifié.");
     }
 
     final totalMin = produits.fold<double>(0, (a, b) => a + b.budgetMin);

@@ -32,6 +32,19 @@ Ce mode ajoute dans `server.py` une compatibilite staging/TestFlight pour :
 - `POST /v2/auth/login`
 - `GET /v2/auth/me`
 - `GET /v2/billing/entitlements`
+- `GET /v2/sync`
+- `GET /v2/clients`
+- `PUT /v2/clients/{id}`
+- `POST /v2/clients`
+- `GET /v2/interventions`
+- `PUT /v2/interventions/{id}`
+- `POST /v2/interventions`
+- `GET /v2/financial-documents`
+- `PUT /v2/financial-documents/{id}`
+- `POST /v2/financial-documents`
+- `GET /v2/media`
+- `POST /v2/media/upload`
+- `GET /v2/media/{id}/download`
 
 tout en conservant :
 
@@ -98,6 +111,7 @@ Attendu :
 - `200`
 - `service = hydr-azur-sync`
 - `v2Auth = true`
+- `syncV2 = true`
 
 Login demo Pro :
 
@@ -111,6 +125,29 @@ Validation session :
 
 ```bash
 curl -i https://ac-piscine-pro-backend.onrender.com/v2/auth/me \
+  -H "Authorization: Bearer VOTRE_TOKEN"
+```
+
+Push client minimal :
+
+```bash
+curl -i -X PUT https://ac-piscine-pro-backend.onrender.com/v2/clients/client-demo-1 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer VOTRE_TOKEN" \
+  -d '{"id":"client-demo-1","name":"Client Démo","createdAtIso":"2026-04-19T08:00:00Z","updatedAtIso":"2026-04-19T08:00:00Z","version":1}'
+```
+
+Pull clients :
+
+```bash
+curl -i https://ac-piscine-pro-backend.onrender.com/v2/clients \
+  -H "Authorization: Bearer VOTRE_TOKEN"
+```
+
+Pull sync global :
+
+```bash
+curl -i https://ac-piscine-pro-backend.onrender.com/v2/sync \
   -H "Authorization: Bearer VOTRE_TOKEN"
 ```
 
@@ -138,3 +175,4 @@ La correction est :
 2. garder la Start Command `python3 server.py`
 3. verifier `APP_ENV=staging`
 4. relancer le seed demo
+5. valider au minimum `GET /health`, `POST /v2/auth/login`, `GET /v2/auth/me`, `GET /v2/clients`
