@@ -1,0 +1,201 @@
+{
+  "@@locale": "fr",
+  "appTitle": "HydrAzur Pro",
+  "save": "Enregistrer",
+  "preview": "Prévisualiser",
+  "reset": "Réinitialiser",
+  "pdf": "PDF",
+  "share": "Partager",
+  "send": "Envoyer",
+  "accept": "Accepter",
+  "quoteLabel": "Devis",
+  "invoiceLabel": "Facture",
+  "draftStatus": "Brouillon",
+  "sentStatus": "Envoyé",
+  "approvedStatus": "Accepté",
+  "paidStatus": "Payé",
+  "pricingSettingsTitle": "Entreprise",
+  "companyIdentityTitle": "Identité entreprise",
+  "companyNameLabel": "Nom de l’entreprise",
+  "defaultTechnicianLabel": "Technicien par défaut",
+  "phoneLabel": "Téléphone",
+  "emailLabel": "Email",
+  "addressLabel": "Adresse",
+  "websiteLabel": "Site web",
+  "countryLabel": "Pays",
+  "localeLabel": "Langue / région",
+  "currencyLabel": "Devise",
+  "businessRegistrationLabelField": "Libellé d’immatriculation",
+  "businessRegistrationValueLabel": "Numéro d’immatriculation",
+  "taxRegistrationValueLabel": "Identifiant fiscal",
+  "documentMentionLabel": "Mention sur les documents",
+  "cloudPreparationTitle": "Synchronisation cloud",
+  "cloudPreparationSubtitle": "Connectez-vous puis synchronisez vos données.",
+  "showBudgetEstimatesTitle": "Budget estimatif",
+  "showBudgetEstimatesSubtitle": "Affiche le chiffrage des produits et le total dans le diagnostic et le PDF.",
+  "defaultLaborTitle": "Main-d’œuvre par défaut",
+  "defaultLaborSubtitle": "Montant utilisé dans le chiffrage du diagnostic.",
+  "defaultLaborFieldLabel": "Main-d’œuvre ({currencyCode})",
+  "@defaultLaborFieldLabel": {
+    "placeholders": {
+      "currencyCode": {
+        "type": "String"
+      }
+    }
+  },
+  "productPricingTitle": "Tarifs produits",
+  "productPricingSubtitle": "Renseignez vos tarifs minimum et maximum. Vous pouvez saisir le même montant dans les deux champs pour définir un prix fixe.",
+  "pricingSaved": "Réglages enregistrés.",
+  "unitLabel": "Unité : {unit}",
+  "@unitLabel": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "minPriceLabel": "Prix mini",
+  "maxPriceLabel": "Prix maxi",
+  "cloudSettingsSaved": "Réglages cloud enregistrés.",
+  "cloudPayloadPrepared": "Payload de synchro préparé: {path}",
+  "@cloudPayloadPrepared": {
+    "placeholders": {
+      "path": {
+        "type": "String"
+      }
+    }
+  },
+  "cloudEndpointRequired": "Renseigne un endpoint cloud.",
+  "cloudSyncTitle": "Synchronisation cloud",
+  "enableCloudSync": "Activer la synchro cloud",
+  "autoPreparePayloads": "Préparer automatiquement les payloads",
+  "syncModeLabel": "Mode de synchro",
+  "syncModeLegacy": "Legacy",
+  "syncModeV2": "V2",
+  "apiEndpointLabel": "Endpoint API",
+  "apiKeyTokenLabel": "Clé API / token",
+  "lastPreparedLabel": "Dernier payload préparé : {date}",
+  "@lastPreparedLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "lastPushLabel": "Dernier envoi : {date}",
+  "@lastPushLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "lastPullLabel": "Dernière récupération : {date}",
+  "@lastPullLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "statusWithValue": "Statut : {status}",
+  "@statusWithValue": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "prepare": "Préparer",
+  "pull": "Récupérer",
+  "sending": "En cours...",
+  "cloudSyncHelp": "L’endpoint doit accepter un POST JSON pour l’envoi et retourner un JSON pour la récupération. Un payload direct ou un objet avec une clé \"payload\" sont supportés.",
+  "financialDocumentUpdated": "Document mis à jour : {status}.",
+  "@financialDocumentUpdated": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "invoiceCreatedFromQuote": "Facture créée à partir du devis enregistré.",
+  "financialDocumentsTitle": "Documents - {clientName}",
+  "@financialDocumentsTitle": {
+    "placeholders": {
+      "clientName": {
+        "type": "String"
+      }
+    }
+  },
+  "noFinancialDocuments": "Aucun devis ni aucune facture enregistrés",
+  "numberToAssign": "Numéro à attribuer",
+  "lineCountSummary": "{count, plural, one{{count} ligne} other{{count} lignes}} • {total} TTC",
+  "@lineCountSummary": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "subtotalTaxSummary": "HT {subtotal} • {taxLabel} {taxRate}",
+  "@subtotalTaxSummary": {
+    "placeholders": {
+      "subtotal": {
+        "type": "String"
+      },
+      "taxLabel": {
+        "type": "String"
+      },
+      "taxRate": {
+        "type": "String"
+      }
+    }
+  },
+  "depositDueSummary": "Acompte {deposit} • Reste {due}",
+  "@depositDueSummary": {
+    "placeholders": {
+      "deposit": {
+        "type": "String"
+      },
+      "due": {
+        "type": "String"
+      }
+    }
+  },
+  "createInvoiceAction": "Créer la facture",
+  "markPaid": "Marquer comme payé",
+  "financialDocumentDefaultQuoteTitle": "Devis intervention piscine",
+  "financialDocumentDefaultInvoiceTitle": "Facture intervention piscine",
+  "quoteValidityDefault": "Valable 30 jours",
+  "invoiceDueDefault": "Paiement à réception",
+  "quoteDepositPaymentDefault": "Acompte à validation",
+  "invoicePaymentMethodDefault": "Virement ou CB",
+  "financialDocumentSavedQuote": "Devis enregistré dans le dossier client.",
+  "financialDocumentSavedInvoice": "Facture enregistrée dans le dossier client.",
+  "createQuoteTitle": "Créer un devis",
+  "createInvoiceTitle": "Créer une facture",
+  "documentSectionTitle": "Document",
+  "numberLabel": "Numéro",
+  "teamTechnicianLabel": "Technicien de l’équipe",
+  "titleLabel": "Titre",
+  "technicianLabel": "Technicien",
+  "statusLabel": "Statut",
+  "quoteValidityLabel": "Validité du devis",
+  "paymentDueLabel": "Échéance de paiement",
+  "taxRateFieldLabel": "TVA (%)",
+  "defaultTaxLabel": "TVA",
+  "depositPaidFieldLabel": "Acompte / déjà payé",
+  "quotePaymentTermsLabel": "Modalité de règlement",
+  "invoicePaymentTermsLabel": "Mode de règlement",
+  "billableLinesTitle": "Lignes facturables",
+  "totalExcludingTax": "Total HT",
+  "depositLabel": "Acompte",
+  "totalIncludingTax": "Total TTC",
+  "remainingEstimate": "Reste à prévoir",
+  "netToPay": "Net à payer",
+  "notesTitle": "Notes",
+  "mentionsRemarksLabel": "Mentions / remarques"
+}

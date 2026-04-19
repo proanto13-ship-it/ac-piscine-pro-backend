@@ -1,0 +1,201 @@
+{
+  "@@locale": "en",
+  "appTitle": "HydrAzur Pro",
+  "save": "Save",
+  "preview": "Preview",
+  "reset": "Reset",
+  "pdf": "PDF",
+  "share": "Share",
+  "send": "Send",
+  "accept": "Approve",
+  "quoteLabel": "Quote",
+  "invoiceLabel": "Invoice",
+  "draftStatus": "Draft",
+  "sentStatus": "Sent",
+  "approvedStatus": "Approved",
+  "paidStatus": "Paid",
+  "pricingSettingsTitle": "Company",
+  "companyIdentityTitle": "Company identity",
+  "companyNameLabel": "Company name",
+  "defaultTechnicianLabel": "Default technician",
+  "phoneLabel": "Phone",
+  "emailLabel": "Email",
+  "addressLabel": "Address",
+  "websiteLabel": "Website",
+  "countryLabel": "Country",
+  "localeLabel": "Language / region",
+  "currencyLabel": "Currency",
+  "businessRegistrationLabelField": "Registration label",
+  "businessRegistrationValueLabel": "Registration number",
+  "taxRegistrationValueLabel": "Tax registration",
+  "documentMentionLabel": "Note on documents",
+  "cloudPreparationTitle": "Cloud sync",
+  "cloudPreparationSubtitle": "Sign in, then keep your data in sync.",
+  "showBudgetEstimatesTitle": "Estimated budget",
+  "showBudgetEstimatesSubtitle": "Shows product pricing and the total in diagnostics and PDFs.",
+  "defaultLaborTitle": "Default labor",
+  "defaultLaborSubtitle": "Amount used in the diagnostic estimate.",
+  "defaultLaborFieldLabel": "Labor ({currencyCode})",
+  "@defaultLaborFieldLabel": {
+    "placeholders": {
+      "currencyCode": {
+        "type": "String"
+      }
+    }
+  },
+  "productPricingTitle": "Product pricing",
+  "productPricingSubtitle": "Enter your minimum and maximum prices. You can use the same value in both fields to define a fixed price.",
+  "pricingSaved": "Settings saved.",
+  "unitLabel": "Unit: {unit}",
+  "@unitLabel": {
+    "placeholders": {
+      "unit": {
+        "type": "String"
+      }
+    }
+  },
+  "minPriceLabel": "Min price",
+  "maxPriceLabel": "Max price",
+  "cloudSettingsSaved": "Cloud settings saved.",
+  "cloudPayloadPrepared": "Sync payload prepared: {path}",
+  "@cloudPayloadPrepared": {
+    "placeholders": {
+      "path": {
+        "type": "String"
+      }
+    }
+  },
+  "cloudEndpointRequired": "Please enter a cloud endpoint.",
+  "cloudSyncTitle": "Cloud sync",
+  "enableCloudSync": "Enable cloud sync",
+  "autoPreparePayloads": "Automatically prepare payloads",
+  "syncModeLabel": "Sync mode",
+  "syncModeLegacy": "Legacy",
+  "syncModeV2": "V2",
+  "apiEndpointLabel": "API endpoint",
+  "apiKeyTokenLabel": "API key / token",
+  "lastPreparedLabel": "Last payload prepared: {date}",
+  "@lastPreparedLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "lastPushLabel": "Last push: {date}",
+  "@lastPushLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "lastPullLabel": "Last pull: {date}",
+  "@lastPullLabel": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "statusWithValue": "Status: {status}",
+  "@statusWithValue": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "prepare": "Prepare",
+  "pull": "Pull",
+  "sending": "Sending...",
+  "cloudSyncHelp": "The endpoint must accept a JSON POST for upload and return JSON for download. A direct payload or an object with a \"payload\" key are both supported.",
+  "financialDocumentUpdated": "Document updated: {status}.",
+  "@financialDocumentUpdated": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "invoiceCreatedFromQuote": "Invoice created from the saved quote.",
+  "financialDocumentsTitle": "Documents - {clientName}",
+  "@financialDocumentsTitle": {
+    "placeholders": {
+      "clientName": {
+        "type": "String"
+      }
+    }
+  },
+  "noFinancialDocuments": "No quotes or invoices saved yet",
+  "numberToAssign": "Number to assign",
+  "lineCountSummary": "{count, plural, one{{count} line} other{{count} lines}} • {total} incl. tax",
+  "@lineCountSummary": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
+  "subtotalTaxSummary": "Excl. tax {subtotal} • {taxLabel} {taxRate}",
+  "@subtotalTaxSummary": {
+    "placeholders": {
+      "subtotal": {
+        "type": "String"
+      },
+      "taxLabel": {
+        "type": "String"
+      },
+      "taxRate": {
+        "type": "String"
+      }
+    }
+  },
+  "depositDueSummary": "Deposit {deposit} • Due {due}",
+  "@depositDueSummary": {
+    "placeholders": {
+      "deposit": {
+        "type": "String"
+      },
+      "due": {
+        "type": "String"
+      }
+    }
+  },
+  "createInvoiceAction": "Create invoice",
+  "markPaid": "Mark as paid",
+  "financialDocumentDefaultQuoteTitle": "Pool service quote",
+  "financialDocumentDefaultInvoiceTitle": "Pool service invoice",
+  "quoteValidityDefault": "Valid for 30 days",
+  "invoiceDueDefault": "Payment due on receipt",
+  "quoteDepositPaymentDefault": "Deposit on approval",
+  "invoicePaymentMethodDefault": "Bank transfer or card",
+  "financialDocumentSavedQuote": "Quote saved in the client file.",
+  "financialDocumentSavedInvoice": "Invoice saved in the client file.",
+  "createQuoteTitle": "Create quote",
+  "createInvoiceTitle": "Create invoice",
+  "documentSectionTitle": "Document",
+  "numberLabel": "Number",
+  "teamTechnicianLabel": "Team technician",
+  "titleLabel": "Title",
+  "technicianLabel": "Technician",
+  "statusLabel": "Status",
+  "quoteValidityLabel": "Quote validity",
+  "paymentDueLabel": "Payment due",
+  "taxRateFieldLabel": "Tax (%)",
+  "defaultTaxLabel": "Tax",
+  "depositPaidFieldLabel": "Deposit / already paid",
+  "quotePaymentTermsLabel": "Payment terms",
+  "invoicePaymentTermsLabel": "Payment method",
+  "billableLinesTitle": "Billable lines",
+  "totalExcludingTax": "Total excl. tax",
+  "depositLabel": "Deposit",
+  "totalIncludingTax": "Total incl. tax",
+  "remainingEstimate": "Remaining estimate",
+  "netToPay": "Net due",
+  "notesTitle": "Notes",
+  "mentionsRemarksLabel": "Mentions / remarks"
+}

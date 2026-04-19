@@ -1,0 +1,61 @@
+name: ac_piscine_pro
+description: Application piscine pro
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.1.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  shared_preferences: ^2.5.4
+  path_provider: ^2.1.5
+  percent_indicator: ^4.2.3
+  pdf: ^3.12.0
+  printing: ^5.14.3
+  intl: ^0.20.2
+  image_picker: ^1.1.2
+  url_launcher: ^6.3.1
+  flutter_secure_storage: ^9.2.4
+  package_info_plus: ^8.0.2
+  archive: ^3.6.1
+  in_app_purchase: ^3.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.0
+
+flutter:
+  generate: true
+  uses-material-design: true
+
+  assets:
+    - assets/bg.PNG
+    - icon.png
+    - docs/launch/
+
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Bold.ttf
+          weight: 700
+
+flutter_launcher_icons:
+  ios: true
+  android: false
+  image_path: "icon.png"
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  image: icon.png
+  android: true
+  ios: true
